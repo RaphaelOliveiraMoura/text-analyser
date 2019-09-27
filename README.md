@@ -6,7 +6,8 @@ Microserviço de análise de texto baseado em verbos da `taxonimia de bloom`.
 
 ```
 Taxonomia é um termo bastante usado em diferentes
-áreas e, segundo a Wikipédia (2006), é a ciência de classificação, denominação e organização de um
+áreas e, segundo a Wikipédia (2006), é a ciência
+de classificação, denominação e organização de um
 sistema pré-determinado e que tem como resultante
 um framework conceitual para discussões, análises
 e/ou recuperação de informação

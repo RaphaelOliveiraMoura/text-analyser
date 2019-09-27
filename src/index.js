@@ -31,10 +31,13 @@ function getResultsAboutCategory(sanitizedText, totalWords, category) {
 
   if (!regexMatchResult) return { percent: 0, ammount: 0, words: [] };
 
+  const wordsWihtoutBoundaries =
+    regexMatchResult.map(word => word.trim()) || [];
+
   return {
-    percent: calculatePontuation(regexMatchResult, totalWords),
-    ammount: regexMatchResult.length || 0,
-    words: regexMatchResult || []
+    percent: calculatePontuation(wordsWihtoutBoundaries, totalWords),
+    ammount: wordsWihtoutBoundaries.length || 0,
+    words: wordsWihtoutBoundaries
   };
 }
 
@@ -43,6 +46,8 @@ function makeTextAnalyse(text) {
    * Limpa um texto, removendo espaços desnecessários, enters e tabs
    * Adiciona um espaço no inicio e no final do texto, para que
    * a primeira e ultima palavra seja considerado uma palavra entre bordas
+   * E duplica todos os espaços entre palavras, para facilitar a busca delas
+   * via REGEX
    */
   const textWithSpacesInBoundary = ` ${text} `;
   const sanitizedText = textWithSpacesInBoundary
@@ -54,6 +59,7 @@ function makeTextAnalyse(text) {
    * Faz a contagem de palavras presentes no texto
    * Remove 2, pois são os valores em brancos adicionados no inicio e no
    * final do texto sanitizado
+   * Remove os  espaços duplicados entre palavras
    */
   const totalWords = sanitizedText.replace(/ {2}/g, ' ').split(' ').length - 2;
 
